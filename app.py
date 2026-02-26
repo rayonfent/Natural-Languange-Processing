@@ -12,19 +12,19 @@ def clean_text(text):
     text = text.translate(str.maketrans("", "", string.punctuation))
     return text
 
-st.title("Aplikasi Analisis Sentimen Review Produk")
+st.title("Sentiment Analysis App")
 
-user_input = st.text_area("Masukkan teks review:")
+user_input = st.text_area("Enter review text:")
 
-if st.button("Prediksi"):
+if st.button("Predict"):
     if user_input.strip() != "":
         cleaned = clean_text(user_input)
         vectorized = tfidf.transform([cleaned])
         prediction = model.predict(vectorized)
 
         if prediction[0] == 1:
-            st.success("Sentimen Positif")
+            st.success("Positive Sentiment")
         else:
-            st.error("Sentimen Negatif")
+            st.error("Negative Sentiment")
     else:
-        st.warning("Silakan masukkan teks terlebih dahulu.")
+        st.warning("Please enter text.")
